@@ -23,6 +23,7 @@ export class ContextMenu extends Menu {
             item.classList.add('menu-item');
             this.el.appendChild(item);
 
+            // Добавляет слушателя для элемента меню
             item.addEventListener('click', (event) => {
                 new Class().trigger();
             });
@@ -30,20 +31,12 @@ export class ContextMenu extends Menu {
     }
 
     #setupMenuInteractions = () => {
-        // Запрещаем стандартное контекстное меню
         document.addEventListener('contextmenu', event => {
-            event.preventDefault();
+            event.preventDefault(); // Запрещает стандартное контекстное меню
             this.open(event.clientX, event.clientY);
         });
 
-        // Закрываем меню при клике вне его
+        // Закрывает меню при клике вне его
         document.addEventListener('click', () => this.close());
-
-        // Добавляем слушатель для элементов меню
-        this.el.addEventListener('click', event => {
-            if (event.target.classList.contains('menu-item')) {
-                console.log('Command:', event.target.textContent);
-            }
-        });
     }
 }
