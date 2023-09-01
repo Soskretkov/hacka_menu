@@ -1,8 +1,8 @@
 import { Menu } from './core/menu'
 
 export class ContextMenu extends Menu {
-    initialize(modulesArray) {
-        this.add(modulesArray);
+    constructor(selector) {
+        super(selector);
         this.#setupMenuInteractions();
     }
 
@@ -16,8 +16,8 @@ export class ContextMenu extends Menu {
         this.el.classList.remove('open');
     }
 
-    add(modulesArray) {
-        modulesArray.forEach(Class => {
+    add(classArray) {
+        classArray.forEach(Class => {
             const item = document.createElement('li');
             item.textContent = Class.menuName;
             item.classList.add('menu-item');
