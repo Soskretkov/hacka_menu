@@ -3,12 +3,13 @@ import { getRandomColor } from '../utils.js'
 
 
 export class BackgroundModule extends Module {
-    constructor() {
-      super('background', 'Поменять цвет');
-    }
-  
-    trigger() {
-      document.body.style.backgroundColor = getRandomColor();
-    }
+  static menuName = 'Поменять цвет';
+
+  constructor() {
+    super('background', BackgroundModule.menuName);
   }
-  
+
+  trigger() {
+    document.body.style.backgroundColor = getRandomColor();
+  }
+}

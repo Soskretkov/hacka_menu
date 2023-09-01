@@ -1,7 +1,35 @@
 import { Menu } from './core/menu'
 
 export class ContextMenu extends Menu {
-    initialize() {
+    initialize(modulesArray) {
+        this.add(modulesArray);
+        this.#setupMenuInteractions();
+    }
+
+    open(x, y) {
+        this.el.style.top = `${y}px`;
+        this.el.style.left = `${x}px`;
+        this.el.classList.add('open');
+    }
+
+    close() {
+        this.el.classList.remove('open');
+    }
+
+    add(modulesArray) {
+        modulesArray.forEach(Class => {
+            const item = document.createElement('li');
+            item.textContent = Class.menuName;
+            item.classList.add('menu-item');
+            this.el.appendChild(item);
+
+            item.addEventListener('click', (event) => {
+                new Class().trigger();
+            });
+        });
+    }
+
+    #setupMenuInteractions = () => {
         // Запрещаем стандартное контекстное меню
         document.addEventListener('contextmenu', event => {
             event.preventDefault();
@@ -11,35 +39,11 @@ export class ContextMenu extends Menu {
         // Закрываем меню при клике вне его
         document.addEventListener('click', () => this.close());
 
+        // Добавляем слушатель для элементов меню
         this.el.addEventListener('click', event => {
             if (event.target.classList.contains('menu-item')) {
                 console.log('Command:', event.target.textContent);
             }
         });
     }
-
-    open(x, y) {
-        this.el.style.top = `${y}px`;
-        this.el.style.left = `${x}px`;
-        this.el.classList.add('open');
-    }
-    close() {
-        this.el.classList.remove('open');
-    }
-
-    add(label) {
-        const item = document.createElement('li');
-        item.textContent = label;
-        item.classList.add('menu-item');
-        this.el.appendChild(item);
-    }
 }
-
-const contextMenu = new ContextMenu('#menu');
-contextMenu.initialize();
-
-
-contextMenu.add('Считать клики за 3 секунды');
-contextMenu.add('Создать фигуру');
-contextMenu.add('Поменять цвет');
-contextMenu.add('Вызвать сообщение');

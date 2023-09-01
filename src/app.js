@@ -1,6 +1,6 @@
 import './styles.css'
 import {ContextMenu} from './menu'
-import { BackgroundModule } from './modules/background.module';
+import { BackgroundModule } from './modules/background.module.js';
 
-// Создаём экземпляр модуля
-new BackgroundModule().trigger();
+const contextMenu = new ContextMenu('#menu');
+contextMenu.initialize([BackgroundModule]);
