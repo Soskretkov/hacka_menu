@@ -1,11 +1,7 @@
-import {Menu} from './core/menu'
-
+import { Menu } from './core/menu'
 
 export class ContextMenu extends Menu {
-    constructor(selector) {
-        super(selector);
-        this.items = [];
-
+    initialize() {
         // Запрещаем стандартное контекстное меню
         document.addEventListener('contextmenu', event => {
             event.preventDefault();
@@ -37,10 +33,10 @@ export class ContextMenu extends Menu {
         item.classList.add('menu-item');
         this.el.appendChild(item);
     }
-    
 }
 
 const contextMenu = new ContextMenu('#menu');
+contextMenu.initialize();
 
 
 contextMenu.add('Считать клики за 3 секунды');
