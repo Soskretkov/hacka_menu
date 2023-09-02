@@ -1,4 +1,4 @@
-import { Menu } from './core/menu'
+import { Menu } from './core/menu.js'
 
 export class ContextMenu extends Menu {
     constructor(selector) {

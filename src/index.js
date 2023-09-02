@@ -1,6 +1,6 @@
 import './index.css';
-import { ContextMenu } from './js/menu';
-import { BackgroundModule } from './js/modules/background.module.js';
+import { ContextMenu } from './menu.js';
+import { BackgroundModule } from './modules/background.module.js';
 
 const contextMenu = new ContextMenu('#menu');
 initializeContextMenu(contextMenu);
