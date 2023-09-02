@@ -3,11 +3,12 @@ import { getRandomColor } from '../utils.js'
 
 
 export class BackgroundModule extends Module {
-  constructor() {
-    super('background', 'Поменять цвет');
+  constructor(labelText) {
+    super('background', labelText || 'Change color');
   }
 
   trigger() {
-    document.body.style.backgroundColor = getRandomColor();
+    const strColor =  getRandomColor();
+    document.body.style.backgroundColor = strColor;
   }
 }

@@ -16,18 +16,15 @@ export class ContextMenu extends Menu {
         this.el.classList.remove('open');
     }
 
-    add(moduleClassesArray) {
-        moduleClassesArray.forEach(Class => {
-            const classInstance = new Class();
-            const strHtml = classInstance.toHTML().trim(); // Получение HTML-строки
+    add(moduleInstance) {
+        const strHtml = moduleInstance.toHTML().trim(); // Получение HTML-строки
 
-            this.el.insertAdjacentHTML('beforeend', strHtml);
-            const $element = this.el.lastElementChild;
+        this.el.insertAdjacentHTML('beforeend', strHtml);
+        const $element = this.el.lastElementChild;
 
-            // Назначает слушателя элементу в меню
-            $element.addEventListener('click', (event) => {
-                classInstance.trigger();
-            });
+        // Назначает слушателя элементу в меню
+        $element.addEventListener('click', (event) => {
+            moduleInstance.trigger();
         });
     }
 
