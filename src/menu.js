@@ -16,20 +16,24 @@ export class ContextMenu extends Menu {
         this.el.classList.remove('open');
     }
 
-    add(classArray) {
-        classArray.forEach(Class => {
-            const item = document.createElement('li');
-            item.textContent = Class.menuName;
-            item.classList.add('menu-item');
-            this.el.appendChild(item);
+    add(moduleClassesArray) {
+        moduleClassesArray.forEach(Class => {
+            const classInstance = new Class();
+            const strHtml = classInstance.toHTML().trim(); // Получение HTML-строки
 
-            // Добавляет слушателя для элемента меню
-            item.addEventListener('click', (event) => {
-                new Class().trigger();
+            this.el.insertAdjacentHTML('beforeend', strHtml);
+            const $element = this.el.lastElementChild;
+
+            // Назначает слушателя элементу в меню
+            $element.addEventListener('click', (event) => {
+                classInstance.trigger();
             });
         });
     }
 
+    // Метод устанавливает базовые слушатели событий для контекстного меню (открытие, закрытие).
+    // Является приватным, так как не предполагается вызов извне класса.
+    // Стрелочная сигнатура упрощает работу с методом в виду однозначности this
     #setupMenuInteractions = () => {
         document.addEventListener('contextmenu', event => {
             event.preventDefault(); // Запрещает стандартное контекстное меню
