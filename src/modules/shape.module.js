@@ -1,7 +1,7 @@
 import './shape-style.css'
 import { Module } from '../core/module'
 import { getRandomColor, random } from '../utils'
-import { clearPreviousModuleEffects } from '../appManager.js'
+import { clearPreviousModuleEffects } from '../app-manager.js'
 
 export class ShapeModule extends Module {
     constructor(labelText) {

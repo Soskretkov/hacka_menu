@@ -1,8 +1,6 @@
 import './index.css';
 import { ContextMenu } from './menu.js';
-import { BackgroundModule } from './modules/background.module.js';
-import { ShapeModule } from './modules/shape.module.js';
-import { setInitialAppSettings, initializeContextMenu } from './appManager.js';
+import { setInitialAppSettings, initializeContextMenu } from './app-manager.js';
 
 // Объединяет функции управления приложением в один объект
 const appManager = { setInitialAppSettings, initializeContextMenu }

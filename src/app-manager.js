@@ -1,4 +1,6 @@
 import { getGlobalSettings } from './localStorage.js';
+import { BackgroundModule } from './modules/background.module.js';
+import { ShapeModule } from './modules/shape.module.js';
 
 
 export function clearPreviousModuleEffects() {
