@@ -1,5 +1,6 @@
 import { Module } from '../core/module'
 import { getRandomColor } from '../utils.js'
+import { setGlobalSettings } from '../localStorageAPI.js'
 
 
 export class BackgroundModule extends Module {
@@ -8,7 +9,8 @@ export class BackgroundModule extends Module {
   }
 
   trigger() {
-    const strColor =  getRandomColor();
+    const strColor = getRandomColor();
     document.body.style.backgroundColor = strColor;
+    setGlobalSettings({ backgroundColor: strColor })
   }
 }
