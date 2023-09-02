@@ -1,4 +1,4 @@
-import { getGlobalSettings } from './localStorage.js';
+import { getGlobalSettings } from './local-storage.js';
 import { BackgroundModule } from './modules/background.module.js';
 import { ShapeModule } from './modules/shape.module.js';
 

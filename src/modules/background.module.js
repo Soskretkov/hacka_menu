@@ -1,6 +1,6 @@
 import { Module } from '../core/module'
 import { getRandomColor } from '../utils.js'
-import { setGlobalSettings } from '../localStorage.js'
+import { setGlobalSettings } from '../local-storage.js'
 
 
 export class BackgroundModule extends Module {
