@@ -1,7 +1,7 @@
 import './timer-module.css'
 import { Module } from '../core/module'
-import { clearPreviousModuleEffects } from '../app-manager.js'
-const appManager = { clearPreviousModuleEffects }
+import { clearPreviousModuleEffects, setInitialAppSettings } from '../app-manager.js'
+const appManager = { clearPreviousModuleEffects, setInitialAppSettings }
 import { getRandomElementFromArray } from '../utils'
 const utils = { getRandomElementFromArray }
 
@@ -21,47 +21,38 @@ export class TimerModule extends Module {
             numTime = Number(prompt('Введите целое число больше 0'))
         }
 
-        let audio = new Audio()
-        audio.preload = 'auto'
-        audio.src = '../assets/sound/sound.mp3'
 
-        // Добавляем обработчики ошибок
-        audio.onerror = function () {
-            alert('Ошибка при загрузке аудиофайла');
-            return;
-        };
 
         const $timer = document.createElement('h1')
         $timer.id = 'time'
 
         document.body.append($timer)
-
-        // this.#setTime(numTime, $timer, audio)
-        audio.play()
+        document.body.style.backgroundColor = utils.getRandomElementFromArray(COLORS_ARRAY)
+        this.#setTime(numTime, $timer)
     }
 
+    // #updateDOM = () => { }
 
-    #setTime = (intInterval, $element, audio) => {
+
+    #setTime = (intInterval, $element) => {
+        let audio = new Audio()
+        audio.preload = 'auto'
+        audio.src = '../assets/sound/sound.mp3'
         $element.innerHTML = `Осталось ${intInterval} сек.`
-        setInterval(() => {
+        const intervalId = setInterval(() => {
             if (intInterval > 0) {
                 document.getElementById("time").style.backgroundColor = utils.getRandomElementFromArray(COLORS_ARRAY)
                 document.body.style.backgroundColor = utils.getRandomElementFromArray(COLORS_ARRAY)
                 --intInterval
                 $element.innerHTML = `Осталось ${intInterval} сек.`
-                console.log(intInterval)
             } else {
                 // воспроизводится звук
                 audio.play()
-
-                // Оповещаем об ошибке воспроизведения
-                audio.onerror = function () {
-                    alert('Ошибка при загрузке аудиофайла');
-                };
-
                 alert('Таймер закончен')
+
                 document.querySelector('#time').remove()
-                clearInterval(1)
+                clearInterval(intervalId)
+                appManager.setInitialAppSettings()
             }
         }, 1000);
     }
