@@ -58,14 +58,14 @@ export class QuoteModule extends Module {
     trigger() {
         appManager.clearPreviousModuleEffects()
 
+        this.#createQuoteContainer()
+
         const quoteHandler = this.#createQuoteHandler()
         quoteHandler()
         setInterval(quoteHandler, 6000)
     }
 
     #createQuoteHandler = () => {
-        const $container = this.#createQuoteContainer()
-        document.body.append($container)
         const $quoteContainer = document.querySelector('.quote-container');
         const $author = document.getElementById("quoteAuthor")
         const $quoteText = document.getElementById("quoteText")
@@ -101,7 +101,6 @@ export class QuoteModule extends Module {
 
         $quoteContainer.append($blockH1, $quoteText, $quoteAuthor)
         $containerBlock.append($quoteContainer)
-        
-        return $containerBlock;
+        document.body.append($containerBlock)        
     }
 }

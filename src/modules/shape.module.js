@@ -11,51 +11,86 @@ export class ShapeModule extends Module {
         super('shapeModule', labelText || 'Create a figure')
     }
 
+
     trigger() {
         appManager.clearPreviousModuleEffects()
-        this.#createRandomShape()
+
+        const shape = this.#createRandomShape()
+        this.#setShapeStyle(shape)
+        this.#setPosition(shape)
+        this.#updateDOM(shape)
     }
 
+
     #createRandomShape = () => {
-        const shape = document.createElement('div')
-        const shapeTypes = ['circle', 'square', 'rectangle', 'oval', 'triangle'];
-        const randomShapeType = utils.getRandomElementFromArray(shapeTypes);
+        const SHAPE_TYPES = ['circle', 'square', 'rectangle', 'oval', 'triangle'];
+        const strRandomShapeType = utils.getRandomElementFromArray(SHAPE_TYPES);
+        const $randomShape = this.#createShapeElement(strRandomShapeType)
 
-
-        shape.classList.add(randomShapeType)
-        shape.setAttribute('id', 'figure')
-        const color = utils.getRandomColor()
-        shape.style.background = color
-        const size = utils.random(50, 500) // случайный размер от 50 до 500 пикселей
-
-        // проверяем какая фигура и добавляем для нее стили
-        if (randomShapeType === 'rectangle' || randomShapeType === 'oval') {
-            const height = size
-            const width = height + 200
-            shape.style.maxWidth = width + 'px'
-            shape.style.height = height + 'px'
-        } else if (randomShapeType === 'triangle') {
-            shape.style.width = '0'
-            shape.style.height = '0'
-            shape.style.background = 'transparent'
-            shape.style.borderLeft = `${size}px solid transparent`
-            shape.style.borderRight = `${size}px solid transparent`
-            shape.style.borderTop = '0'
-            shape.style.borderBottom = `${size + 50}px solid ${color}`
-        } else {
-            shape.style.maxWidth = size + 'px'
-            shape.style.height = size + 'px'
+        return {
+            type: strRandomShapeType,
+            domElement: $randomShape,
         }
+    }
 
-        const maxX = window.innerWidth - parseFloat(shape.style.width)
-        const maxY = window.innerHeight - parseFloat(shape.style.height)
+
+    #createShapeElement = (strShapeType) => {
+        const $ = document.createElement('div')
+
+        $.classList.add(strShapeType)
+        $.setAttribute('id', 'figure')
+        return $
+    }
+
+
+    #setPosition = (shape) => {
+        const $element = shape.domElement
+        const maxX = window.innerWidth - parseFloat($element.style.width)
+        const maxY = window.innerHeight - parseFloat($element.style.height)
         const randomX = Math.random() * maxX
         const randomY = Math.random() * maxY
 
-        shape.style.left = randomX + 'px'
-        shape.style.top = randomY + 'px'
+        $element.style.left = randomX + 'px'
+        $element.style.top = randomY + 'px'
+    }
 
-        document.body.style.position = 'relative'
-        document.body.appendChild(shape)
+
+    // проверяет какая фигура и добавляет для нее стили
+    #setShapeStyle = (shape) => {
+        const INT_RECTANGLE_EXTRA_WIDTH = 200        
+        const $element = shape.domElement
+        const intSize = utils.random(50, 500) // случайное целое число, выражающее размер от 50 до 500 пикселей
+        const strColor = utils.getRandomColor()
+
+        $element.style.background = strColor
+
+        switch (shape.type) {
+            case 'rectangle':
+            case 'oval':
+
+                const height = intSize
+                const width = height + INT_RECTANGLE_EXTRA_WIDTH
+                $element.style.maxWidth = width + 'px'
+                $element.style.height = height + 'px'
+                break
+            case 'triangle':
+                $element.style.width = '0'
+                $element.style.height = '0'
+                $element.style.background = 'transparent'
+                $element.style.borderLeft = `${intSize}px solid transparent`
+                $element.style.borderRight = `${intSize}px solid transparent`
+                $element.style.borderTop = '0'
+                $element.style.borderBottom = `${intSize + 50}px solid ${strColor}`
+                break
+            default:
+                $element.style.maxWidth = intSize + 'px'
+                $element.style.height = intSize + 'px'
+        }
+    }
+
+
+    #updateDOM(shape) {
+        document.body.style.position = 'relative';
+        document.body.appendChild(shape.domElement);
     }
 }
