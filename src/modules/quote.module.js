@@ -58,45 +58,50 @@ export class QuoteModule extends Module {
     trigger() {
         appManager.clearPreviousModuleEffects()
 
-        this.#createQuoteContainer()        
-        this.#getQuote()
-
-        setInterval(() => {
-            this.#getQuote()
-        }, 5000)
+        const quoteHandler = this.#createQuoteHandler()
+        quoteHandler()
+        setInterval(quoteHandler, 5000)
     }
 
-    #getQuote = () => {
-        const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)]
-        document.getElementById("quoteText").innerHTML = quote.text
-        document.getElementById("quoteAuthor").innerHTML = `- ${quote.author}`
-
+    #createQuoteHandler = () => {
+        const $quoteContainer = this.#createQuoteContainer()
+        const $author = document.getElementById("quoteAuthor")
+        const $quoteText = document.getElementById("quoteText")
         const colorsArray = ['#F0FFF0', '#F5FFFA', '#F0FFFF', '#F0F8FF', '#FFF5EE', '#F8F8FF', '#F5F5F5', '#F5F5DC', '#FDF5E6', '#FFFAF0']
-        const strColor = utils.getRandomElementFromArray(colorsArray)
-        document.getElementById("quoteContainer").style.backgroundColor = strColor
+
+        return () => {
+            const quote = QUOTES[Math.floor(Math.random() * QUOTES.length)]
+            $quoteText.innerHTML = quote.text
+            $author.innerHTML = `- ${quote.author}`
+
+            const strColor = utils.getRandomElementFromArray(colorsArray)
+            $quoteContainer.style.backgroundColor = strColor
+        }
     }
 
     #createQuoteContainer = () => {
-        const containerBlock = document.createElement('div')
-        containerBlock.className = 'container'
+        const $containerBlock = document.createElement('div')
+        $containerBlock.className = 'container'
 
-        const quoteContainer = document.createElement('div')
-        quoteContainer.className = 'quote-container'
-        quoteContainer.id = 'quoteContainer'
+        const $quoteContainer = document.createElement('div')
+        $quoteContainer.className = 'quote-container'
+        $quoteContainer.id = 'quoteContainer'
 
 
-        const blockH1 = document.createElement('h1')
-        blockH1.textContent = 'Цитата дня'
-        const quoteText = document.createElement('div')
-        quoteText.className = 'quote-text'
-        quoteText.id = 'quoteText'
+        const $blockH1 = document.createElement('h1')
+        $blockH1.textContent = 'Цитата дня'
+        const $quoteText = document.createElement('div')
+        $quoteText.className = 'quote-text'
+        $quoteText.id = 'quoteText'
 
-        const quoteAuthor = document.createElement('div')
-        quoteAuthor.className = 'quote-author'
-        quoteAuthor.id = 'quoteAuthor'
+        const $quoteAuthor = document.createElement('div')
+        $quoteAuthor.className = 'quote-author'
+        $quoteAuthor.id = 'quoteAuthor'
 
-        quoteContainer.append(blockH1, quoteText, quoteAuthor)
-        containerBlock.append(quoteContainer)
-        document.body.append(containerBlock)
+        $quoteContainer.append($blockH1, $quoteText, $quoteAuthor)
+        $containerBlock.append($quoteContainer)
+        document.body.append($containerBlock)
+
+        return $containerBlock;
     }
 }
