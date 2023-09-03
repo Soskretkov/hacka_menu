@@ -1,7 +1,10 @@
-import './shape-style.css'
+import './shape.module.css'
 import { Module } from '../core/module'
-import { getRandomColor, random } from '../utils'
+import { getRandomColor, random, getRandomElementFromArray } from '../utils'
+const utils = { getRandomColor, random, getRandomElementFromArray }
 import { clearPreviousModuleEffects } from '../app-manager.js'
+const appManager = { clearPreviousModuleEffects }
+
 
 export class ShapeModule extends Module {
     constructor(labelText) {
@@ -9,26 +12,29 @@ export class ShapeModule extends Module {
     }
 
     trigger() {
-        clearPreviousModuleEffects()
+        appManager.clearPreviousModuleEffects()
         this.#createRandomShape()
     }
 
     #createRandomShape = () => {
         const shape = document.createElement('div')
-        const randomShape = this.#getRandomShapeType()
-        shape.classList.add(randomShape)
+        const shapeTypes = ['circle', 'square', 'rectangle', 'oval', 'triangle'];
+        const randomShapeType = utils.getRandomElementFromArray(shapeTypes);
+
+
+        shape.classList.add(randomShapeType)
         shape.setAttribute('id', 'figure')
-        const color = getRandomColor()
+        const color = utils.getRandomColor()
         shape.style.background = color
-        const size = random(50, 500) // случайный размер от 50 до 500 пикселей
+        const size = utils.random(50, 500) // случайный размер от 50 до 500 пикселей
 
         // проверяем какая фигура и добавляем для нее стили
-        if (randomShape === 'rectangle' || randomShape === 'oval') {
+        if (randomShapeType === 'rectangle' || randomShapeType === 'oval') {
             const height = size
             const width = height + 200
             shape.style.maxWidth = width + 'px'
             shape.style.height = height + 'px'
-        } else if (randomShape === 'triangle') {
+        } else if (randomShapeType === 'triangle') {
             shape.style.width = '0'
             shape.style.height = '0'
             shape.style.background = 'transparent'
@@ -51,11 +57,5 @@ export class ShapeModule extends Module {
 
         document.body.style.position = 'relative'
         document.body.appendChild(shape)
-    }
-
-    #getRandomShapeType = () => {
-        const shapes = ['circle', 'square', 'rectangle', 'oval', 'triangle'];
-        const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
-        return randomShape
     }
 }

@@ -10,3 +10,8 @@ export function getRandomColor() {
   }
   return strColor;
 }
+
+export function getRandomElementFromArray(array) {
+  const index = Math.floor(Math.random() * array.length);
+  return array[index];
+}
