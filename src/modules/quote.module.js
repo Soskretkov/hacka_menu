@@ -60,13 +60,13 @@ export class QuoteModule extends Module {
 
         const quoteHandler = this.#createQuoteHandler()
         quoteHandler()
-        setInterval(quoteHandler, 5000)
+        setInterval(quoteHandler, 6000)
     }
 
     #createQuoteHandler = () => {
         const $container = this.#createQuoteContainer()
         document.body.append($container)
-        const $quoteContainer = document.querySelector('quote-containe');
+        const $quoteContainer = document.querySelector('.quote-container');
         const $author = document.getElementById("quoteAuthor")
         const $quoteText = document.getElementById("quoteText")
         const colorsArray = ['#F0FFF0', '#F5FFFA', '#F0FFFF', '#F0F8FF', '#FFF5EE', '#F8F8FF', '#F5F5F5', '#F5F5DC', '#FDF5E6', '#FFFAF0']

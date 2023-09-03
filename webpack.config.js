@@ -19,7 +19,7 @@ module.exports = (env, argv) => {
       main: [
         'core-js/stable',
         'regenerator-runtime/runtime',
-        './index.js'
+        './app.js'
       ],
     },
     output: {
