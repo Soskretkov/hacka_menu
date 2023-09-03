@@ -47,7 +47,7 @@ export class TimerModule extends Module {
     }
 
 
-    #setTime = (intInterval, $element) => {
+    #setTime = (intInterval, $element, audio) => {
         $element.innerHTML = `Осталось ${intInterval} сек.`
         const intervalId = setInterval(() => {
             if (intInterval > 0) {
