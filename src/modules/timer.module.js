@@ -13,12 +13,13 @@ export class TimerModule extends Module {
         super('quoteModule', labelText || 'Timer')
     }
 
+    #intervalId = null;
 
     trigger() {
         appManager.clearPreviousModuleEffects()
 
         const numTime = this.#getUserInputAsNumber()
-        const $timer = this.#createAndSetupTimerInBody()
+        const $timer = this.#createTimerOnWebPage()
 
         const audio = new Audio(audioSrc)
 
@@ -37,7 +38,7 @@ export class TimerModule extends Module {
     }
 
 
-    #createAndSetupTimerInBody = () => {
+    #createTimerOnWebPage = () => {
         const $timer = document.createElement('h1')
         $timer.id = 'time'
 
@@ -51,8 +52,12 @@ export class TimerModule extends Module {
 
 
     #setTime = (intInterval, $element, audio) => {
+        if (this.#intervalId) {
+            clearInterval(this.#intervalId)
+        }
+
         $element.innerHTML = `Осталось ${intInterval} сек.`
-        const intervalId = setInterval(() => {
+        this.#intervalId = setInterval(() => {
             if (intInterval > 0) {
                 document.getElementById("time").style.backgroundColor = utils.getRandomElementFromArray(COLORS_ARRAY)
                 document.body.style.backgroundColor = utils.getRandomElementFromArray(COLORS_ARRAY)
@@ -60,11 +65,14 @@ export class TimerModule extends Module {
                 $element.innerHTML = `Осталось ${intInterval} сек.`
             } else {
                 // воспроизводится звук
-                audio.play()
-                alert('Таймер закончен')
+                audio.play().then(() => {
+                    setTimeout(() => {
+                        alert('Таймер закончен');
+                    }, 500);
+                })
 
                 document.querySelector('#time').remove()
-                clearInterval(intervalId)
+                clearInterval(this.#intervalId)
                 appManager.setInitialAppSettings()
             }
         }, 1000);
