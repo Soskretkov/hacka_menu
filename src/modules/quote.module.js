@@ -1,4 +1,4 @@
-import './quote.module.css'
+import './quote-module.css'
 import { Module } from '../core/module'
 import { clearPreviousModuleEffects } from '../app-manager.js'
 const appManager = { clearPreviousModuleEffects }
@@ -64,7 +64,9 @@ export class QuoteModule extends Module {
     }
 
     #createQuoteHandler = () => {
-        const $quoteContainer = this.#createQuoteContainer()
+        const $container = this.#createQuoteContainer()
+        document.body.append($container)
+        const $quoteContainer = document.querySelector('quote-containe');
         const $author = document.getElementById("quoteAuthor")
         const $quoteText = document.getElementById("quoteText")
         const colorsArray = ['#F0FFF0', '#F5FFFA', '#F0FFFF', '#F0F8FF', '#FFF5EE', '#F8F8FF', '#F5F5F5', '#F5F5DC', '#FDF5E6', '#FFFAF0']
@@ -87,7 +89,6 @@ export class QuoteModule extends Module {
         $quoteContainer.className = 'quote-container'
         $quoteContainer.id = 'quoteContainer'
 
-
         const $blockH1 = document.createElement('h1')
         $blockH1.textContent = 'Цитата дня'
         const $quoteText = document.createElement('div')
@@ -100,8 +101,7 @@ export class QuoteModule extends Module {
 
         $quoteContainer.append($blockH1, $quoteText, $quoteAuthor)
         $containerBlock.append($quoteContainer)
-        document.body.append($containerBlock)
-
+        
         return $containerBlock;
     }
 }

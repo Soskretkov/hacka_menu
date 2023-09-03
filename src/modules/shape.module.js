@@ -1,4 +1,4 @@
-import './shape.module.css'
+import './shape-module.css'
 import { Module } from '../core/module'
 import { getRandomColor, random, getRandomElementFromArray } from '../utils'
 const utils = { getRandomColor, random, getRandomElementFromArray }
