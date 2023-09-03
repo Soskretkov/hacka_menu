@@ -41,9 +41,11 @@ export class TimerModule extends Module {
         const $timer = document.createElement('h1')
         $timer.id = 'time'
 
-        document.body.append($timer)
+        const $timerConteiner = document.createElement('div')
+        $timerConteiner.setAttribute('id', 'timer-conteiner')
+        $timerConteiner.append($timer)
+        document.body.append($timerConteiner)
         document.body.style.backgroundColor = utils.getRandomElementFromArray(COLORS_ARRAY)
-        document.body.style.display = "flex";
         return $timer
     }
 
