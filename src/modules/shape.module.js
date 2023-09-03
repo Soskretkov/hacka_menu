@@ -57,7 +57,7 @@ export class ShapeModule extends Module {
 
     // проверяет какая фигура и добавляет для нее стили
     #setShapeStyle = (shape) => {
-        const INT_RECTANGLE_EXTRA_WIDTH = 200        
+        const INT_RECTANGLE_EXTRA_WIDTH = 200
         const $element = shape.domElement
         const intSize = utils.random(50, 500) // случайное целое число, выражающее размер от 50 до 500 пикселей
         const strColor = utils.getRandomColor()
@@ -67,7 +67,6 @@ export class ShapeModule extends Module {
         switch (shape.type) {
             case 'rectangle':
             case 'oval':
-
                 const height = intSize
                 const width = height + INT_RECTANGLE_EXTRA_WIDTH
                 $element.style.maxWidth = width + 'px'

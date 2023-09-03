@@ -2,6 +2,7 @@ import { getGlobalSettings } from './local-storage.js';
 import { BackgroundModule } from './modules/background.module.js';
 import { ShapeModule } from './modules/shape.module.js';
 import { QuoteModule } from './modules/quote.module.js';
+import { TimerModule } from './modules/timer.module.js';
 
 
 export function setInitialAppSettings() {
@@ -10,12 +11,13 @@ export function setInitialAppSettings() {
 }
 
 
-// Данная функция не является частью класса ContextMenu так как нейминг внутри меню важно отделить от логики модулей.
+// Данная функция намеренно не является частью класса ContextMenu так как нейминг внутри меню важно отделить от логики модулей.
 // Больший контроль на уровне app-manager.js не только нагляден, но и полезен (например, в сценарии мультиязычной локализации)
 export function initializeContextMenu(contextMenu) {
     contextMenu.add(new BackgroundModule('Поменять цвет'));
     contextMenu.add(new ShapeModule('Создать фигуру'));
     contextMenu.add(new QuoteModule('Случайная цитата'));
+    contextMenu.add(new TimerModule('Таймер'));
 }
 
 
