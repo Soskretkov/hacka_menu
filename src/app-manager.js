@@ -4,7 +4,7 @@ import { ShapeModule } from './modules/shape.module.js';
 import { QuoteModule } from './modules/quote.module.js';
 import { TimerModule } from './modules/timer.module.js';
 import { SoundModule } from './modules/sound.module.js';
-
+import { WeatherModule } from './modules/weather.module.js';
 
 
 export function setInitialAppSettings() {
@@ -21,6 +21,7 @@ export function initializeContextMenu(contextMenu) {
     contextMenu.add(new QuoteModule('Случайная цитата'));
     contextMenu.add(new TimerModule('Таймер'));
     contextMenu.add(new SoundModule('Случайный звук'));
+    contextMenu.add(new WeatherModule('Узнать погоду'));
 }
 
 

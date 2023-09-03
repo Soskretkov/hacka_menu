@@ -1,0 +1,65 @@
+.weather .inputs 
+{
+    padding: 2rem 0 2rem 0;
+    text-align: center;
+    justify-content: center;
+    background: white;
+}
+.weather .inputs input[type="text"] 
+{
+    height: 4rem;
+    width: 20rem;
+    background: #212121;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    border: 2px solid #c2c2c2;
+    border-radius: 2px;
+    margin-right:4px ;
+}
+.weather .inputs input[type="submit"] 
+{
+    height: 3rem;
+    width: 6rem;
+    background: #0a67ca;
+    font-weight: bold;
+    color: white;
+    font-size: 1rem;
+    margin-top: 20px;
+    border: none;
+    border-radius: 2px;
+}
+
+.info {
+    text-align: center;
+    width: 100%;
+    color: #16a864;
+    padding: 20px;
+    background: #0548b5;
+}
+
+.info h2 {
+    padding: 5px 0;
+    text-align: center;
+    color: white;
+    font-family: sans-serif;
+}
+.info p {
+    margin:20px 50px;
+    margin-right: 20px;
+    text-align: center;
+    color: #fff;
+    font-size:23px;
+}
+
+.info h2 span {
+    font-size: 26px;
+    color: #9beefb;
+}
+
+.info p span {
+    color: #f4780d;
+    font-size: 25px;
+}
