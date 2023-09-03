@@ -23,7 +23,7 @@ export class ShapeModule extends Module {
 
 
     #createRandomShape = () => {
-        const SHAPE_TYPES = ['circle', 'square', 'rectangle', 'oval', 'triangle'];
+        const SHAPE_TYPES = ['circle', 'square', 'rectangle', 'oval'];
         const strRandomShapeType = utils.getRandomElementFromArray(SHAPE_TYPES);
         const $randomShape = this.#createShapeElement(strRandomShapeType)
 
@@ -71,15 +71,6 @@ export class ShapeModule extends Module {
                 const width = height + INT_RECTANGLE_EXTRA_WIDTH
                 $element.style.maxWidth = width + 'px'
                 $element.style.height = height + 'px'
-                break
-            case 'triangle':
-                $element.style.width = '0'
-                $element.style.height = '0'
-                $element.style.background = 'transparent'
-                $element.style.borderLeft = `${intSize}px solid transparent`
-                $element.style.borderRight = `${intSize}px solid transparent`
-                $element.style.borderTop = '0'
-                $element.style.borderBottom = `${intSize + 50}px solid ${strColor}`
                 break
             default:
                 $element.style.maxWidth = intSize + 'px'

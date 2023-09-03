@@ -1,10 +1,6 @@
-import './sound-module.css'
 import { Module } from '../core/module'
 import { random } from '../utils'
 const utils = { random }
-import { clearPreviousModuleEffects } from '../app-manager.js'
-const appManager = { clearPreviousModuleEffects }
-
 
 export class SoundModule extends Module {
     constructor(labelText) {
@@ -12,21 +8,7 @@ export class SoundModule extends Module {
     }
 
     trigger() {
-        appManager.clearPreviousModuleEffects();
-
-        const $button = this.createPlayButton();
-        document.body.append($button)
-
-        $button.addEventListener("click", () => {
-            this.playRandomSound();
-        });
-    }
-
-    createPlayButton() {
-        const $button = document.createElement('button');
-        $button.className = 'play-button';
-        $button.textContent = 'Play Random Sound';
-        return $button;
+        this.playRandomSound();
     }
 
     playRandomSound() {
@@ -40,7 +22,7 @@ export class SoundModule extends Module {
 
         const audio = new Audio(audioPath);
         audio.currentTime = 0;
-        
+
         audio.play();
     }
 }
