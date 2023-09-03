@@ -27,7 +27,6 @@ export class WeatherModule extends Module {
     } 
 
     #populateWeatherSection = (section) => {
-
         // Создаем блок для ввода города
         const $inputContainer = document.createElement('div')
         $inputContainer.className = 'inputs'
@@ -39,7 +38,7 @@ export class WeatherModule extends Module {
 
         const $addInputElement = document.createElement('input')
         $addInputElement.setAttribute('id', 'add-submit')
-        $addInputElement.value = 'Добавить'
+        $addInputElement.value = 'Узнать'
         $addInputElement.type = 'submit'
 
         // Создаем блок для вывода информации о погоде

@@ -38,4 +38,6 @@ export function clearPreviousModuleEffects() {
             $body.removeChild(child);
         }
     });
+
+    document.body.style.display = "block";
 }

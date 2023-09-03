@@ -43,6 +43,7 @@ export class TimerModule extends Module {
 
         document.body.append($timer)
         document.body.style.backgroundColor = utils.getRandomElementFromArray(COLORS_ARRAY)
+        document.body.style.display = "flex";
         return $timer
     }
 
